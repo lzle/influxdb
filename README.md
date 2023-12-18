@@ -46,6 +46,9 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 Alias=influxd.service
+
+$ chown -R influxdb:influxdb /data/
+$ chown -R influxdb:influxdb /metadata/
 ```
 
 启动
@@ -61,6 +64,30 @@ $ /usr/bin/influxd -config /etc/influxdb/influxdb.conf
 ```bash
 $ systemctl stop influxdb
 ```
+
+日志 rotate
+```
+[root@dx-lt-yd-zhejiang-huzhou-3-183-131-179-201 logrotate.d]# cat /etc/logrotate.d/influxdb
+/var/log/influxdb/influxd.access.log {
+    daily
+    rotate 7
+    missingok
+    dateext
+    copytruncate
+    compress
+}
+
+[root@dx-lt-yd-zhejiang-huzhou-3-183-131-179-201 logrotate.d]# cat /etc/logrotate.d/influxdb-info
+/var/log/influxdb/influxd.info.log {
+    daily
+    rotate 7
+    missingok
+    dateext
+    copytruncate
+    compress
+}
+```
+
 
 ### 用户
 
