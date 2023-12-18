@@ -16,7 +16,7 @@
 [官网下载](https://www.influxdata.com/downloads/) 指定的版本，本章使用 1.8.6。
 
 ```bash
-$ wget https://dl.influxdata.com/influxdb/releases/influxdb1.8.6.x86_64.rpm
+$ wget https://dl.influxdata.com/influxdb/releases/influxdb-1.8.6.x86_64.rpm
 $ rpm -Uvh influxdb-1.8.6.x86_64.rpm
 ```
 
