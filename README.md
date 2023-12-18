@@ -20,10 +20,32 @@ $ wget https://dl.influxdata.com/influxdb/releases/influxdb-1.8.6.x86_64.rpm
 $ rpm -Uvh influxdb-1.8.6.x86_64.rpm
 ```
 
-编辑配置文件
+编辑配置文件&systemd配置
 
 ```bash
 $ vim /etc/influxdb/influxdb.conf
+
+$ vim /etc/systemd/system/influxd.service
+# If you modify this, please also make sure to edit init.sh
+
+[Unit]
+Description=InfluxDB is an open-source, distributed, time series database
+Documentation=https://docs.influxdata.com/influxdb/
+After=network-online.target
+
+[Service]
+User=influxdb
+Group=influxdb
+LimitNOFILE=65536
+EnvironmentFile=-/etc/default/influxdb
+#ExecStart=/usr/bin/influxd -config /etc/influxdb/influxdb.conf $INFLUXD_OPTS
+ExecStart=/bin/bash -c "/usr/bin/influxd -config /etc/influxdb/influxdb.conf >> /var/log/influxdb/influxd.info.log 2>&1"
+KillMode=control-group
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=influxd.service
 ```
 
 启动
