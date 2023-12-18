@@ -87,6 +87,14 @@ $ systemctl stop influxdb
     compress
 }
 ```
+crotab
+
+```
+$ crotab -e
+#Ansible: Logrotate
+0 0 * * * /usr/sbin/logrotate -f /etc/logrotate.d/influxdb > /dev/null 2>&1
+0 0 * * * /usr/sbin/logrotate -f /etc/logrotate.d/influxdb-info > /dev/null 2>&1
+```
 
 
 ### 用户
