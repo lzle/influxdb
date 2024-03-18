@@ -20,7 +20,7 @@ $ wget https://dl.influxdata.com/influxdb/releases/influxdb-1.8.6.x86_64.rpm
 $ rpm -Uvh influxdb-1.8.6.x86_64.rpm
 ```
 
-编辑配置文件&systemd配置
+编辑配置文件 systemd 配置
 
 ```bash
 $ vim /etc/influxdb/influxdb.conf
